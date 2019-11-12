@@ -1,0 +1,32 @@
+<!-- 
+<div class="utable" *ngFor="let emp of employees">
+  <p>{{emp.empId}}</p>
+  <p>{{emp.uname}}</p>
+  <p>{{emp.email}}</p>
+  <p>{{emp.pwd}}</p>
+  <p>{{emp.role}}</p>
+</div> -->
+<div class="container">
+        <table class="table table-striped">
+          <thead>
+              <tr>
+                <th>EmployeeId</th>
+                <th>Name</th>
+                <th>User Name</th>                
+                <th>IsActive</th>
+                <th>Role</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let emp of employees">
+              <td>{{ emp.empId}}</td>
+              <td>{{ emp.name }}</td>
+              <td>{{ emp.uname}}</td>
+              <td>{{ emp.IsActive}}</td>
+              <td>{{emp.role}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+<mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25]">
+</mat-paginator>

@@ -1,0 +1,53 @@
+<div class="login-wrapper">
+
+  <p>
+    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      Add New User
+    </button>
+  </p>
+
+  <div id="collapseExample" [ngbCollapse]="isCollapsed">
+    <mat-card class="box">
+      <!-- <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+      </mat-card-header> -->
+
+      <form [formGroup]="myForm" class="example-form" fxLayout="row" (ngSubmit)="onSubmit()">
+
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input type="number" matInput placeholder="employeeId" formControlName="empId">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input type="text" matInput placeholder="name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input type="text" matInput placeholder="Username" formControlName="uname">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input type="password" matInput placeholder="password" formControlName="pwd">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Choose a role...</mat-label>
+            <mat-select [(value)]="selected" formControlName="role">
+              <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+          <button type="submit" [disabled]="!myForm.valid" mat-stroked-button color="accent" class="btn-block"
+            (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseExample">Register</button>
+        </mat-card-content>
+
+
+
+      </form>
+    </mat-card>
+  </div>
+</div>
+
+<div class="utable">
+  <app-user-data></app-user-data>
+</div>
