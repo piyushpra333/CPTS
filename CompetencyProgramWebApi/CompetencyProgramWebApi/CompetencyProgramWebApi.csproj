@@ -208,6 +208,7 @@
       <DependentUpon>CompetencyProgramdatamodel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AnswersController.cs" />
+    <Compile Include="Controllers\CommonTasksController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />

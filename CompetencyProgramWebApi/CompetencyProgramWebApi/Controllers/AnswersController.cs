@@ -15,13 +15,14 @@ namespace CompetencyProgramWebApi.Controllers
         //Admin :- Display All Answers of All Trainees 
         public HttpResponseMessage Get()
         {
-            var allanswers = entities.Answers.Select(a => new { a.Employee_EmpID, a.Employee.Name, a.Question.QueDescription, a.AnsDescription, a.Score, a.Question.Training.TrainingName ,a.Question.Training.Employee.Name});
+            var allanswers = entities.Answers.Where(a => a.Employee.IsActive == true).Select(a => new { a.Employee_EmpID, a.Employee.Name,  a.Question.Training.TrainingName, a.Question.QueDescription, a.AnsDescription, a.Score});
             return Request.CreateResponse(HttpStatusCode.OK, allanswers);
         }
 
 
         public void Post([FromBody]Employee emp)
         {
+
         }
 
 

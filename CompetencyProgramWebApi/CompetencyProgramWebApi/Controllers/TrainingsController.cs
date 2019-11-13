@@ -11,7 +11,7 @@ namespace CompetencyProgramWebApi.Controllers
     {
         CompetencyTrainingEntities entities = new CompetencyTrainingEntities();
 
-        //Admin :- Display All Training Data
+        //Admin :- Display All Training 
         public HttpResponseMessage Get()
         {
             var alltraining = entities.Trainings.Select(t => new { t.TrainingID, t.TrainingName, t.Employee_EmpID, t.Employee.Name, t.Discription, t.DateOfTraining, t.Status });

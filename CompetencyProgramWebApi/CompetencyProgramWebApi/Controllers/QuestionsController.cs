@@ -18,9 +18,18 @@ namespace CompetencyProgramWebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, allquestion);
         }
 
-
-        public void Post([FromBody]Employee emp)
+        //Trainer :- Display All Question which are added in current Training.
+        public HttpResponseMessage Get(int id)
         {
+            var currentquestions = entities.Questions.Where(q => q.Training_TrainingID == id).Select(q => new { q.QuestionID, q.QueDescription, q.Duration });
+            return Request.CreateResponse(HttpStatusCode.OK, currentquestions);
+        }
+
+        //Trainer :- Add Questions.
+        public void Post([FromBody]Question que)
+        {
+            entities.Questions.Add(que);
+            entities.SaveChanges();
         }
 
 

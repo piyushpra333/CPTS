@@ -19,6 +19,16 @@ namespace CompetencyProgramWebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, allemployeee);           
         }
 
+        //Trainer :- Display all Trainees with id and name for perticular Question
+
+
+        [Route("api/Employees/GetTrainees")]
+        public HttpResponseMessage GetTrainees()
+        {
+            var allTrainee = entities.Employees.Where(e => e.Role ==  "Trainee").Where(e => e.IsActive == true).Select(x => new { x.EmpID, x.Name });
+            return Request.CreateResponse(HttpStatusCode.OK, allTrainee);
+        }
+
 
         //Admin :- Add new User
         public void Post([FromBody]Employee emp)
