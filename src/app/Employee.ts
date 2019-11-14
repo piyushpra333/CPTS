@@ -3,6 +3,7 @@ export class Employee{
     name:any;
     uname:any;
     pwd:any;
+    CreatedDate:Date;
    isActive:boolean;
     Role:any;
 }

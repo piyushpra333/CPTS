@@ -1,46 +1,56 @@
 <div class="container">
-  <form>
+  <!-- <form>
     <input type="text" name="sample_search" id="sample_search" onkeyup="applyFilter($event.target.value)"
       placeholder="Filter">
-  </form>
-    <table class="table table-striped">
+  </form> -->
+  <table class="table table-striped">
 
 
 
-      <thead>
-        <tr>
-          <th>EmployeeId</th>
-          <th>Name</th>
-          <th>User Name</th>
-          <th>IsActive</th>
-          <th>Role</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let emp of employees">
-          <td>{{ emp.empId}}</td>
-          <td>{{ emp.name }}</td>
-          <td>{{ emp.uname}}</td>
-          <td>
+    <thead>
+      <tr>
+        <th>EmployeeId</th>
+        <th>Name</th>
+        <th>User Name</th>
+       
+        <th>Created Date</th>
+        <th>IsActive</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees">
+        <td>{{ emp.empId}}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.uname}}</td>
+       
+        <td>
+                {{emp.CreatedDate}}
+        </td>
+        <td>
 
-            <mat-slide-toggle [checked]='checked' [disabled]='disabled' [(ngModel)]="status"
-              (change)="getStatus(emp.empId)">
+          <mat-slide-toggle [checked]="emp.isActive"
+            (change)="getStatus(emp.empId,emp.isActive,emp.Role)">
 
-            </mat-slide-toggle>
+          </mat-slide-toggle>
 
-          </td>
+        </td>
+        <!-- <td>
+          {{employees.}}
+        </td> -->
 
-          <td><select [(ngModel)]="Role" class="form-control" [value]="emp.role" (change)="getStatus(emp.empId)">
-              <option value="Admin">Admin</option>
-              <option value="Trainer">Trainer</option>
-              <option value="Trainee">Trainee</option>
-            </select>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-</div>
+        <td><select class="form-control" [value]="emp.Role" (change)="getStatus(emp.empId,emp.isActive,emp.Role)">
+            <option value="Admin">Admin</option>
+            <option value="Trainer">Trainer</option>
+            <option value="Trainee">Trainee</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <mat-paginator [length]="employees.length" [pageSize]="pagesize" (page)="pageEvent = getPaginatorData($event)">
+  </mat-paginator> -->
+
 <!-- <div class="example-container mat-elevation-z8">
   <mat-table #table [dataSource]="employees">
 
@@ -70,6 +80,4 @@
 
 
   </mat-table>
-</div>
-<mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25]">
-</mat-paginator> -->
+</div>-->

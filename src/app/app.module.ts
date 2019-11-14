@@ -16,6 +16,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+/* DatePipe*/
+import {DatePipe} from '@angular/common';
 
 
 /* FormsModule */
@@ -60,7 +62,7 @@ import { UserDataComponent } from './Admin/user-data/user-data.component';
  
  
  
-  providers: [UserService],
+  providers: [UserService,DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
