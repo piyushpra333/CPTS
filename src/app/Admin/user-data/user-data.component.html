@@ -1,32 +1,75 @@
-<!-- 
-<div class="utable" *ngFor="let emp of employees">
-  <p>{{emp.empId}}</p>
-  <p>{{emp.uname}}</p>
-  <p>{{emp.email}}</p>
-  <p>{{emp.pwd}}</p>
-  <p>{{emp.role}}</p>
-</div> -->
 <div class="container">
-        <table class="table table-striped">
-          <thead>
-              <tr>
-                <th>EmployeeId</th>
-                <th>Name</th>
-                <th>User Name</th>                
-                <th>IsActive</th>
-                <th>Role</th>
-              </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let emp of employees">
-              <td>{{ emp.empId}}</td>
-              <td>{{ emp.name }}</td>
-              <td>{{ emp.uname}}</td>
-              <td>{{ emp.IsActive}}</td>
-              <td>{{emp.role}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <form>
+    <input type="text" name="sample_search" id="sample_search" onkeyup="applyFilter($event.target.value)"
+      placeholder="Filter">
+  </form>
+    <table class="table table-striped">
+
+
+
+      <thead>
+        <tr>
+          <th>EmployeeId</th>
+          <th>Name</th>
+          <th>User Name</th>
+          <th>IsActive</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.empId}}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.uname}}</td>
+          <td>
+
+            <mat-slide-toggle [checked]='checked' [disabled]='disabled' [(ngModel)]="status"
+              (change)="getStatus(emp.empId)">
+
+            </mat-slide-toggle>
+
+          </td>
+
+          <td><select [(ngModel)]="Role" class="form-control" [value]="emp.role" (change)="getStatus(emp.empId)">
+              <option value="Admin">Admin</option>
+              <option value="Trainer">Trainer</option>
+              <option value="Trainee">Trainee</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+</div>
+<!-- <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="employees">
+
+    <ng-container matColumnDef="EmployeeID">
+      <mat-header-cell *matHeaderCellDef> EmployeeID </mat-header-cell>
+      <mat-cell *matCellDef="let employee">{{employee.empId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let employee">{{employee.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="UserName">
+      <mat-header-cell *matHeaderCellDef>UserName </mat-header-cell>
+      <mat-cell *matCellDef="let employee">{{employee.uname}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Roles">
+      <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+      <mat-cell *matCellDef="let employee">{{employee.role}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+  </mat-table>
+</div>
 <mat-paginator [length]="5" [pageSize]="3" [pageSizeOptions]="[5, 10, 25]">
-</mat-paginator>
+</mat-paginator> -->

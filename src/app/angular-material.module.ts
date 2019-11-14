@@ -8,6 +8,7 @@ import {
 import {
   MatButtonModule,
   MatToolbarModule,
+  MatSlideToggleModule,
   MatIconModule,
   MatBadgeModule,
   MatSidenavModule,
@@ -29,6 +30,7 @@ import {
   imports: [
     CommonModule,
     MatButtonModule,
+    MatSlideToggleModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
@@ -51,6 +53,7 @@ import {
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
+    MatSlideToggleModule,
     MatBadgeModule,
     MatListModule,
     MatGridListModule,

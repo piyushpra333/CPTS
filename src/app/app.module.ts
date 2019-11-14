@@ -14,6 +14,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 /* */
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -30,12 +31,15 @@ import { UserDataComponent } from './Admin/user-data/user-data.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NewUserComponent,
-    UserDataComponent
+    UserDataComponent,
+    
+ 
   
     
     
@@ -50,8 +54,10 @@ import { UserDataComponent } from './Admin/user-data/user-data.component';
     FormsModule,
     FlexLayoutModule,
     NgbModule,
+    Ng2SearchPipeModule,
   
   ],
+ 
  
  
   providers: [UserService],

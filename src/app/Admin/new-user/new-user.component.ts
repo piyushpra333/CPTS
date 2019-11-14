@@ -13,7 +13,6 @@ import{Router} from '@angular/router';
 import {UserService} from '../../user.service';
 
 import {Employee} from 'src/app/Employee';
-import {MatTableDataSource} from '@angular/material';
 
 
 
@@ -26,6 +25,7 @@ import {MatTableDataSource} from '@angular/material';
 export class NewUserComponent implements OnInit{
   user;
   employees;
+  selected;
   public isCollapsed = true;
   Roles:any=["Admin","Trainer","Trainee"];
   myForm: FormGroup;
@@ -34,8 +34,8 @@ export class NewUserComponent implements OnInit{
    private userservice:UserService,
    private router:Router
   ) { }
-  
-  
+
+
   ngOnInit() {
     this.myForm = new FormGroup({
       empId: new FormControl('', Validators.required),
@@ -57,6 +57,12 @@ onSubmit(){
   this.myForm.reset();
   // this.router.navigate(['/user-data']);
 }
+
+// applyFilter(searchtext: any) {
+//   searchtext = searchtext.trim();
+//   searchtext = searchtext.toLowerCase();
+//   this.employees.name = searchtext;
+// }
 
  
 
