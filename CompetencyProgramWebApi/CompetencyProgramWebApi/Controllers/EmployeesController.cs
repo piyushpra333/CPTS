@@ -19,9 +19,8 @@ namespace CompetencyProgramWebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, allemployeee);           
         }
 
+
         //Trainer :- Display all Trainees with id and name for perticular Question
-
-
         [Route("api/Employees/GetTrainees")]
         public HttpResponseMessage GetTrainees()
         {
@@ -31,13 +30,23 @@ namespace CompetencyProgramWebApi.Controllers
 
 
         //Admin :- Add new User
-        public void Post([FromBody]Employee emp)
+        public HttpResponseMessage Post([FromBody]Employee emp)
         {
-            emp.DateOfCreation = DateTime.Today;
-            emp.IsActive = true;
-            entities.Employees.Add(emp);
-            entities.SaveChanges();
+            var temp = entities.Employees.Where(e => e.UserName == emp.UserName).Any();
+            if (temp)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            else
+            {
+                emp.DateOfCreation = DateTime.Today;
+                emp.IsActive = true;
+                entities.Employees.Add(emp);
+                entities.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
         }
+
 
         //Admin :- Update User
         public void Put([FromBody]Employee emp)

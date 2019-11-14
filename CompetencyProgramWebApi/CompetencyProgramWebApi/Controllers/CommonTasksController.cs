@@ -10,16 +10,18 @@ namespace CompetencyProgramWebApi.Controllers
     public class CommonTasksController : ApiController
     {
         CompetencyTrainingEntities entities = new CompetencyTrainingEntities();
-        public void Post([FromBody]Employee emp)
+        public HttpResponseMessage Post([FromBody]Employee emp)
         {
-            bool logincheck = entities.Employees.Where(e => e.UserName == emp.UserName).Where(e => e.Password == emp.Password).Any();
+            var temp = entities.Employees.Where(e => e.UserName == emp.UserName).Where(e => e.Password == emp.Password).Where(e => e.IsActive == true);
+            bool logincheck = temp.Any();
             if(logincheck)
             {
-                Console.WriteLine("Login");
+                var currentUser = temp.Select(x => new { x.EmpID, x.Role });
+                return Request.CreateResponse(HttpStatusCode.OK, currentUser);
             }
             else
             {
-                Console.WriteLine("Error");
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
         }
     }

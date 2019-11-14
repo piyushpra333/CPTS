@@ -18,6 +18,7 @@ namespace CompetencyProgramWebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, allquestion);
         }
 
+
         //Trainer :- Display All Question which are added in current Training.
         public HttpResponseMessage Get(int id)
         {
@@ -25,17 +26,23 @@ namespace CompetencyProgramWebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, currentquestions);
         }
 
+
         //Trainer :- Add Questions.
-        public void Post([FromBody]Question que)
+        public HttpResponseMessage Post([FromBody]Question que)
         {
-            entities.Questions.Add(que);
-            entities.SaveChanges();
+            var temp = entities.Questions.Where(e => e.Training_TrainingID == que.Training_TrainingID).Where(e => e.QueDescription == que.QueDescription).Any();
+            if (temp)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            else
+            {
+                entities.Questions.Add(que);
+                entities.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.Created);
+            }
         }
 
 
-        public void Put([FromBody]Employee emp)
-        {
-            
-        }
-    }
+     }
 }
