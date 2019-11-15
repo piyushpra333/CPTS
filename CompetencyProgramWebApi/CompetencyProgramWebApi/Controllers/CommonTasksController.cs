@@ -17,7 +17,25 @@ namespace CompetencyProgramWebApi.Controllers
             if(logincheck)
             {
                 var currentUser = temp.Select(x => new { x.EmpID, x.Role });
-                return Request.CreateResponse(HttpStatusCode.OK, currentUser);
+                string userrole = temp.Select(e => e.Role).FirstOrDefault();
+                if(userrole.Equals("Trainee"))
+                {
+                    var statuscheck = entities.Trainings.Where(t => t.Status == "Active").Any();
+                    if(statuscheck)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK, currentUser);
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Forbidden);
+                    }
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, currentUser);
+                }
+                
+               
             }
             else
             {

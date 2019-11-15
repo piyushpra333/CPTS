@@ -24,6 +24,7 @@ namespace CompetencyProgramWebApi.Controllers
         {
             var alltraining = entities.Trainings.Where(t => t.TrainingID == id).Select(t => new { t.TrainingID, t.TrainingName, t.Employee_EmpID, t.Employee.Name, t.Discription, t.DateOfTraining, t.Status });
             return Request.CreateResponse(HttpStatusCode.OK, alltraining);
+            
         }
 
         //Admin :- Add new Training

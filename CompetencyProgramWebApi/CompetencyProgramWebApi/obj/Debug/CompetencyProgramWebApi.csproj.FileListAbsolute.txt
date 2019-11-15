@@ -79,3 +79,6 @@ C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\Competency
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.csproj.CopyComplete
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.dll
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.pdb
+C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\bin\System.Web.Cors.dll
+C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\bin\System.Web.Http.Cors.dll
+C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\bin\System.Web.Http.Cors.xml
