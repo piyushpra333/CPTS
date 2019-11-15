@@ -7,7 +7,7 @@ import { catchError,retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  apiURL: string = 'http://localhost:61230/api/CommonTasks/';
+  apiURL: string = 'http://localhost:61230/api/Commontasks/';
   httpOptions = {
     headers: new HttpHeaders({'Content-Type':'application/json'})
   }
@@ -24,7 +24,7 @@ export class AuthService {
   };
   constructor(private httpClient:HttpClient) { }
   login (hero: Employee): Observable<any> {
-    return this.httpClient.post<Employee>(this.apiURL, hero, this.httpOptions)
+    return this.httpClient.post<any>(this.apiURL, {"UserName":hero.uname,"Password":hero.pwd}, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );

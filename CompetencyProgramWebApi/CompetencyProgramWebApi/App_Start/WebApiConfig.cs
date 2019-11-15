@@ -1,4 +1,5 @@
-﻿using System;
+using CompetencyProgramWebApi.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -19,8 +20,10 @@ namespace CompetencyProgramWebApi
 
             var cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
+            config.MessageHandlers.Add(new PreflightRequestsHandler());
 
-            config.Routes.MapHttpRoute(
+
+      config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

@@ -217,6 +217,7 @@
     <Compile Include="Controllers\CommonTasksController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PreflightRequestsHandler.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\TrainingsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Question.cs">
       <DependentUpon>CompetencyProgramdatamodel.tt</DependentUpon>
     </Compile>
+    <Compile Include="request\Headers.cs" />
     <Compile Include="Training.cs">
       <DependentUpon>CompetencyProgramdatamodel.tt</DependentUpon>
     </Compile>

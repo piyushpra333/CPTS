@@ -72,11 +72,7 @@ export class NewUserComponent implements OnInit {
       emp.uname=this.myForm.value.uname;
       emp.pwd=this.myForm.value.pwd;
      emp.CreatedDate = myDate;
-     
-     
-     
-
-       emp.isActive = true;
+      emp.isActive = true;
       emp.Role = this.myForm.value.role;
     
     }

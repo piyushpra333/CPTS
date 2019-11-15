@@ -19,7 +19,7 @@ import { AuthService } from '../../auth.service';
 
 export class LoginComponent implements OnInit {
 myForm:FormGroup;
-
+temp
 
   constructor( private router:Router,private authService:AuthService) {}
   emp:any = new Employee();
@@ -35,7 +35,11 @@ myForm:FormGroup;
     this.emp.uname= this.myForm.value.uname;
     this.emp.pwd= this.myForm.value.pwd;
     this.authService.login(this.emp).subscribe((res)=>{
-      console.log(res);
+
+    
+      console.log(res[0]['EmpID'] + "  Arpit  ");
+      console.log(res[0]['Role'] + "  Arpit  ");
+
     })
     // this.router.navigate(['new-user']);
   }
