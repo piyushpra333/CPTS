@@ -30,9 +30,11 @@ status:any;
   checked:boolean
   disabled:boolean
  
- getStatus(id){
+ getStatus(id, isActive, Role){
 
   console.log(id);
+  console.log(isActive);
+  console.log(Role);
  }
  applyFilter(searchtext: any) {
   searchtext = searchtext.trim();

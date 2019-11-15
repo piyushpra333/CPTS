@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {UserService} from './user.service';
+import{AuthService} from './auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 /* Routing */
@@ -14,7 +16,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 /* */
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 /* DatePipe*/
 import {DatePipe} from '@angular/common';
@@ -56,13 +58,15 @@ import { UserDataComponent } from './Admin/user-data/user-data.component';
     FormsModule,
     FlexLayoutModule,
     NgbModule,
-    Ng2SearchPipeModule,
+    HttpClientModule,
+   
+  
   
   ],
  
  
  
-  providers: [UserService,DatePipe],
+  providers: [UserService,DatePipe,AuthService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

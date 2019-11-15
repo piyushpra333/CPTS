@@ -9,7 +9,6 @@ import { UserDataComponent } from './Admin/user-data/user-data.component';
 const routes: Routes = [
   {
     path:'',pathMatch:'full',redirectTo:'login'
-
   },
   {
     path:'login', component:LoginComponent
