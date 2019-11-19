@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompetencyTrainingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Answer">
+    <Key>
+      <PropertyRef Name="AnswerID" />
+    </Key>
+    <Property Name="AnswerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AnsDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Score" Type="Int32" Nullable="false" />
+    <Property Name="Employee_EmpID" Type="Int32" />
+    <Property Name="Question_QuestionID" Type="Int32" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_Answers_dbo_Employees_Employee_EmpID" FromRole="Answers" ToRole="Employees" />
+    <NavigationProperty Name="Question" Relationship="Self.FK_dbo_Answers_dbo_Questions_Question_QuestionID" FromRole="Answers" ToRole="Questions" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateOfCreation" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Answers" Relationship="Self.FK_dbo_Answers_dbo_Employees_Employee_EmpID" FromRole="Employees" ToRole="Answers" />
+    <NavigationProperty Name="Trainings" Relationship="Self.FK_dbo_Trainings_dbo_Employees_Employee_EmpID" FromRole="Employees" ToRole="Trainings" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="QuestionID" />
+    </Key>
+    <Property Name="QuestionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QueDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="IsActiveQue" Type="Boolean" Nullable="false" />
+    <Property Name="Training_TrainingID" Type="Int32" />
+    <NavigationProperty Name="Answers" Relationship="Self.FK_dbo_Answers_dbo_Questions_Question_QuestionID" FromRole="Questions" ToRole="Answers" />
+    <NavigationProperty Name="Training" Relationship="Self.FK_dbo_Questions_dbo_Trainings_Training_TrainingID" FromRole="Questions" ToRole="Trainings" />
+  </EntityType>
+  <EntityType Name="Training">
+    <Key>
+      <PropertyRef Name="TrainingID" />
+    </Key>
+    <Property Name="TrainingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrainingName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfTraining" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Employee_EmpID" Type="Int32" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_dbo_Trainings_dbo_Employees_Employee_EmpID" FromRole="Trainings" ToRole="Employees" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK_dbo_Questions_dbo_Trainings_Training_TrainingID" FromRole="Trainings" ToRole="Questions" />
+  </EntityType>
+  <Association Name="FK_dbo_Answers_dbo_Employees_Employee_EmpID">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="Employee_EmpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Answers_dbo_Questions_Question_QuestionID">
+    <End Role="Questions" Type="Self.Question" Multiplicity="0..1" />
+    <End Role="Answers" Type="Self.Answer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Questions">
+        <PropertyRef Name="QuestionID" />
+      </Principal>
+      <Dependent Role="Answers">
+        <PropertyRef Name="Question_QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Trainings_dbo_Employees_Employee_EmpID">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="Trainings" Type="Self.Training" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="Trainings">
+        <PropertyRef Name="Employee_EmpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Questions_dbo_Trainings_Training_TrainingID">
+    <End Role="Trainings" Type="Self.Training" Multiplicity="0..1" />
+    <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trainings">
+        <PropertyRef Name="TrainingID" />
+      </Principal>
+      <Dependent Role="Questions">
+        <PropertyRef Name="Training_TrainingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CompetencyTrainingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Answers" EntityType="Self.Answer" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="Trainings" EntityType="Self.Training" />
+    <AssociationSet Name="FK_dbo_Answers_dbo_Employees_Employee_EmpID" Association="Self.FK_dbo_Answers_dbo_Employees_Employee_EmpID">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Answers_dbo_Questions_Question_QuestionID" Association="Self.FK_dbo_Answers_dbo_Questions_Question_QuestionID">
+      <End Role="Questions" EntitySet="Questions" />
+      <End Role="Answers" EntitySet="Answers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Trainings_dbo_Employees_Employee_EmpID" Association="Self.FK_dbo_Trainings_dbo_Employees_Employee_EmpID">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="Trainings" EntitySet="Trainings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Questions_dbo_Trainings_Training_TrainingID" Association="Self.FK_dbo_Questions_dbo_Trainings_Training_TrainingID">
+      <End Role="Trainings" EntitySet="Trainings" />
+      <End Role="Questions" EntitySet="Questions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
