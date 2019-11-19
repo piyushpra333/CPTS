@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompetencyProgramWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,12 +10,17 @@ namespace CompetencyProgramWebApi.Controllers
 {
     public class QuestionsController : ApiController
     {
-        CompetencyTrainingEntities entities = new CompetencyTrainingEntities();
+        private readonly QuestionDBOperation _dbque;
 
+        public QuestionsController()
+        {
+            _dbque = new QuestionDBOperation();
+        }
+       
         //Admin :- Display All Question of All Trainings 
         public HttpResponseMessage Get()
         {
-            var allquestion = entities.Questions.Select(q => new { q.Training_TrainingID, q.Training.TrainingName, q.Training.Employee_EmpID, q.Training.Employee.Name, q.QuestionID, q.QueDescription });
+            var allquestion = _dbque.AllQuestions();
             return Request.CreateResponse(HttpStatusCode.OK, allquestion);
         }
 
@@ -22,23 +28,32 @@ namespace CompetencyProgramWebApi.Controllers
         //Trainer :- Display All Question which are added in current Training.
         public HttpResponseMessage Get(int id)
         {
-            var currentquestions = entities.Questions.Where(q => q.Training_TrainingID == id).Select(q => new { q.QuestionID, q.QueDescription, q.Duration });
+            var currentquestions = _dbque.CurrentTrainingQuestions(id);
             return Request.CreateResponse(HttpStatusCode.OK, currentquestions);
         }
 
 
+        //Trainer :- Display Active Question
+        [Route("api/Questions/GetQue/{id}")]
+        public HttpResponseMessage GetQue(int id)
+        {
+            var activeque = _dbque.DisplayActiveQue(id);
+            return Request.CreateResponse(HttpStatusCode.OK, activeque);
+
+        }
+
         //Trainer :- Add Questions.
         public HttpResponseMessage Post([FromBody]Question que)
         {
-            var temp = entities.Questions.Where(e => e.Training_TrainingID == que.Training_TrainingID).Where(e => e.QueDescription == que.QueDescription).Any();
-            if (temp)
+            var isExist = _dbque.CheckForExistingQuestion(que);
+
+            if (isExist)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
             else
             {
-                entities.Questions.Add(que);
-                entities.SaveChanges();
+                _dbque.AddNewQuestion(que);
                 return Request.CreateResponse(HttpStatusCode.Created);
             }
         }

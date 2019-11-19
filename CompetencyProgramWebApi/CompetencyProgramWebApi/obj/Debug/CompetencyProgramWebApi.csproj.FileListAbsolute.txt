@@ -74,7 +74,6 @@ C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\Competency
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\bin\Microsoft.AI.Web.xml
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.csprojAssemblyReference.cache
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.csproj.CoreCompileInputs.cache
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.csproj.CopyComplete
 C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.dll
@@ -166,3 +165,4 @@ C:\Users\arpitri\Desktop\MajorProjectCybage\CompetencyProgramWebApi\CompetencyPr
 C:\Users\arpitri\Desktop\MajorProjectCybage\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.csproj.CopyComplete
 C:\Users\arpitri\Desktop\MajorProjectCybage\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.dll
 C:\Users\arpitri\Desktop\MajorProjectCybage\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.pdb
+C:\Users\arpitri\Desktop\Major_Project_WebApi\CompetencyProgramWebApi\CompetencyProgramWebApi\obj\Debug\CompetencyProgramWebApi.csprojAssemblyReference.cache

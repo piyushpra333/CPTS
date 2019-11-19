@@ -230,6 +230,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnswerDBOperation.cs" />
+    <Compile Include="Models\EmployeeDBOperation.cs" />
+    <Compile Include="Models\QuestionDBOperation.cs" />
+    <Compile Include="Models\TrainingDBOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
       <DependentUpon>CompetencyProgramdatamodel.tt</DependentUpon>
@@ -314,7 +318,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

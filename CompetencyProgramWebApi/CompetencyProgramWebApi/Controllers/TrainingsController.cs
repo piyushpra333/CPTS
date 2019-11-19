@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompetencyProgramWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,19 +11,24 @@ namespace CompetencyProgramWebApi.Controllers
 {
     public class TrainingsController : ApiController
     {
-        CompetencyTrainingEntities entities = new CompetencyTrainingEntities();
+        private readonly TrainingDBOperation _dbtrain;
+
+        public TrainingsController()
+        {
+            _dbtrain = new TrainingDBOperation();
+        }
 
         //Admin :- Display All Training 
         public HttpResponseMessage Get()
         {
-            var alltraining = entities.Trainings.Select(t => new { t.TrainingID, t.TrainingName, t.Employee_EmpID, t.Employee.Name, t.Discription, t.DateOfTraining, t.Status });
+            var alltraining = _dbtrain.AllTrainings();
             return Request.CreateResponse(HttpStatusCode.OK, alltraining);
         }
 
-        //Trainer :- Data Of Current Training
+        //Trainer :- Display Current Training
         public HttpResponseMessage Get(int id)
         {
-            var alltraining = entities.Trainings.Where(t => t.TrainingID == id).Select(t => new { t.TrainingID, t.TrainingName, t.Employee_EmpID, t.Employee.Name, t.Discription, t.DateOfTraining, t.Status });
+            var alltraining = _dbtrain.CurrentTraining(id);
             return Request.CreateResponse(HttpStatusCode.OK, alltraining);
             
         }
@@ -30,19 +36,13 @@ namespace CompetencyProgramWebApi.Controllers
         //Admin :- Add new Training
         public void Post([FromBody]Training train)
         {
-            train.Status = "Active";
-            entities.Trainings.Add(train);
-            entities.SaveChanges();
+            _dbtrain.AddNewTraining(train);
         }
-
-
-
+               
         //Trainer :- End Training
         public void Put([FromBody]Training train)
         {
-            train.Status = "DeActive";
-            entities.Entry(train).State = EntityState.Modified;
-            entities.SaveChanges();
+            _dbtrain.EndTraining(train);
         }
     }
 }

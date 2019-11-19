@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompetencyProgramWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,24 +12,30 @@ namespace CompetencyProgramWebApi.Controllers
     {
 
         CompetencyTrainingEntities entities = new CompetencyTrainingEntities();
+        private readonly AnswerDBOperation _dbans;
+
+        public AnswersController()
+        {
+            _dbans = new AnswerDBOperation();
+        }
 
         //Admin :- Display All Answers of All Trainees 
         public HttpResponseMessage Get()
         {
-            var allanswers = entities.Answers.Where(a => a.Employee.IsActive == true).Select(a => new { a.Employee_EmpID, a.Employee.Name,  a.Question.Training.TrainingName, a.Question.QueDescription, a.AnsDescription, a.Score});
+            var allanswers = _dbans.AllAnswers();
             return Request.CreateResponse(HttpStatusCode.OK, allanswers);
         }
 
 
-        public void Post([FromBody]Employee emp)
+        public void Post([FromBody]Answer ans)
         {
-
+            _dbans.AddAnswer(ans);
         }
 
 
-        public void Put([FromBody]Employee emp)
+        public void Put([FromBody]Answer ans)
         {
-
+            _dbans.UpdateScore(ans);
         }
     }
 }

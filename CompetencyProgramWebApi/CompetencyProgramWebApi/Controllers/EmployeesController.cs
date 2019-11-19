@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompetencyProgramWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -10,12 +11,18 @@ namespace CompetencyProgramWebApi.Controllers
 {
     public class EmployeesController : ApiController
     {
-        CompetencyTrainingEntities entities = new CompetencyTrainingEntities();
 
-        //Admin :- Display All User Data
+        private readonly EmployeeDBOperation _empdb;
+
+        public EmployeesController()
+        {
+            _empdb = new EmployeeDBOperation();
+        }
+
+        //Admin :- Display All Employee Data
         public HttpResponseMessage Get()
         {
-            var allemployeee = entities.Employees.Select(x => new { x.EmpID, x.Name, x.UserName, x.DateOfCreation, x.IsActive , x.Role});    
+            var allemployeee = _empdb.AllEmployeeData();  
             return Request.CreateResponse(HttpStatusCode.OK, allemployeee);           
         }
 
@@ -24,25 +31,23 @@ namespace CompetencyProgramWebApi.Controllers
         [Route("api/Employees/GetTrainees")]
         public HttpResponseMessage GetTrainees()
         {
-            var allTrainee = entities.Employees.Where(e => e.Role ==  "Trainee").Where(e => e.IsActive == true).Select(x => new { x.EmpID, x.Name });
+            var allTrainee = _empdb.AllTraineeData();
             return Request.CreateResponse(HttpStatusCode.OK, allTrainee);
         }
 
 
-        //Admin :- Add new User
+        //Admin :- Add new Employee
         public HttpResponseMessage Post([FromBody]Employee emp)
         {
-            var temp = entities.Employees.Where(e => e.UserName == emp.UserName).Any();
-            if (temp)
+            var isExist = _empdb.CheckForExistingEmployee(emp);
+
+            if (isExist)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
             else
             {
-                emp.DateOfCreation = DateTime.Today;
-                emp.IsActive = true;
-                entities.Employees.Add(emp);
-                entities.SaveChanges();
+                _empdb.AddNewEmployee(emp);
                 return Request.CreateResponse(HttpStatusCode.Created);
             }
         }
@@ -51,8 +56,7 @@ namespace CompetencyProgramWebApi.Controllers
         //Admin :- Update User
         public void Put([FromBody]Employee emp)
         {
-            entities.Entry(emp).State = EntityState.Modified;
-            entities.SaveChanges();
+            _empdb.UpdateEmployee(emp);
         }
 
 
