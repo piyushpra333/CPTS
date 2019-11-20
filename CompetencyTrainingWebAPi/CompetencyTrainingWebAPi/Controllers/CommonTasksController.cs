@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompetencyTrainingWebAPi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,12 @@ namespace CompetencyTrainingWebAPi.Controllers
     public class CommonTasksController : ApiController
     {
         CompetencyTrainingEntities entities = new CompetencyTrainingEntities();
+        private readonly CommonDBOperation _dbcommon;
+
+        public CommonTasksController()
+        {
+            _dbcommon = new CommonDBOperation();
+        }
         public HttpResponseMessage Post([FromBody]Employee emp)
         {
             var temp = entities.Employees.Where(e => e.UserName == emp.UserName).Where(e => e.Password == emp.Password).Where(e => e.IsActive == true);
@@ -35,7 +42,6 @@ namespace CompetencyTrainingWebAPi.Controllers
                     return Request.CreateResponse(HttpStatusCode.OK, currentUser);
                 }
 
-
             }
             else
             {
@@ -43,18 +49,12 @@ namespace CompetencyTrainingWebAPi.Controllers
             }
         }
 
-        //select t.TrainingID,a.Employee_EmpID,SUM(a.Score) from Trainings t left outer join Questions q on t.TrainingID = q.Training_TrainingID
-        // left outer join Answers a on q.QuestionID = a.Question_QuestionID group by t.TrainingID, a.Employee_EmpID order by t.TrainingID
 
-
-        //select t.TrainingID,q.QuestionID,a.Employee_EmpID,a.Score from Trainings t left outer join Questions q on t.TrainingID = q.Training_TrainingID
-        //left outer join Answers a on q.QuestionID = a.Question_QuestionID
-
-        //public HttpResponseMessage Get()
-        //{
-        //    var highmarks = entities.Answers.Select(a => new { a.Question.Training_TrainingID, a.Question_QuestionID, a.Employee_EmpID, a.Score }).GroupBy(a => a.Training_TrainingID, a => a.Employee_EmpID);
-
-        //    return Request.CreateResponse(HttpStatusCode.OK, highmarks);
-        //}
+        //Admin :- Get Total Marks for all trainees
+        public HttpResponseMessage Get()
+        {
+            var totalmarks = _dbcommon.TotalScore();
+            return Request.CreateResponse(HttpStatusCode.OK, totalmarks);
+        }
     }
 }

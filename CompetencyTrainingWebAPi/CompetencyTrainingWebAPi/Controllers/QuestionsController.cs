@@ -17,6 +17,7 @@ namespace CompetencyTrainingWebAPi.Controllers
             _dbque = new QuestionDBOperation();
         }
 
+
         //Admin :- Display All Question of All Trainings 
         public HttpResponseMessage Get()
         {
@@ -33,19 +34,40 @@ namespace CompetencyTrainingWebAPi.Controllers
         }
 
 
-        //Trainer :- Display Active Question
+        //Trainer :- Display Selected Question
         [Route("api/Questions/GetQue/{id}")]
         public HttpResponseMessage GetQue(int id)
         {
-            var activeque = _dbque.DisplayActiveQue(id);
-            return Request.CreateResponse(HttpStatusCode.OK, activeque);
+            var selectque = _dbque.DisplaySelectedQue(id);
+            return Request.CreateResponse(HttpStatusCode.OK, selectque);
 
         }
+
+
+        //Trainee :- Display Active Question
+        [Route("api/Questions/GetActiveque")]
+        public HttpResponseMessage GetActiveQue()
+        {
+            bool isActive = _dbque.CheckForActiveQue();
+
+            if(isActive)
+            {
+                var activeque = _dbque.GetActiveQue();
+                return Request.CreateResponse(HttpStatusCode.OK, activeque);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+            
+
+        }
+
 
         //Trainer :- Add Questions.
         public HttpResponseMessage Post([FromBody]Question que)
         {
-            var isExist = _dbque.CheckForExistingQuestion(que);
+            bool isExist = _dbque.CheckForExistingQuestion(que);
 
             if (isExist)
             {
@@ -59,7 +81,7 @@ namespace CompetencyTrainingWebAPi.Controllers
         }
 
 
-        //Trainer :- Update Question status.
+        //Trainer :- Update Question status(Make it active and deactive).
         public void Put([FromBody]Question que)
         {
             _dbque.UpdateQuestionStatus(que);

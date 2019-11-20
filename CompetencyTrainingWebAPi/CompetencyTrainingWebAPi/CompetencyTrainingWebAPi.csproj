@@ -231,6 +231,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AnswerDBOperation.cs" />
+    <Compile Include="Models\CommonDBOperation.cs" />
     <Compile Include="Models\EmployeeDBOperation.cs" />
     <Compile Include="Models\QuestionDBOperation.cs" />
     <Compile Include="Models\TrainingDBOperation.cs" />

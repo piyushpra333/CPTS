@@ -81,3 +81,4 @@ C:\Users\arpitri\Desktop\Major_WebAPI\CompetencyTrainingWebAPi\CompetencyTrainin
 C:\Users\arpitri\Desktop\Major_WebAPI\CompetencyTrainingWebAPi\CompetencyTrainingWebAPi\bin\System.Web.Cors.dll
 C:\Users\arpitri\Desktop\Major_WebAPI\CompetencyTrainingWebAPi\CompetencyTrainingWebAPi\bin\System.Web.Http.Cors.dll
 C:\Users\arpitri\Desktop\Major_WebAPI\CompetencyTrainingWebAPi\CompetencyTrainingWebAPi\bin\System.Web.Http.Cors.xml
+C:\Users\arpitri\Desktop\Major_WebAPI\CompetencyTrainingWebAPi\CompetencyTrainingWebAPi\obj\Debug\CompetencyTrainingWebAPi.csprojAssemblyReference.cache

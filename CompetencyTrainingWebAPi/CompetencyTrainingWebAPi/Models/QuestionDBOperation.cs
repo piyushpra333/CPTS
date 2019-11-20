@@ -35,12 +35,23 @@ namespace CompetencyTrainingWebAPi.Models
             entities.SaveChanges();
         }
 
-        public object DisplayActiveQue(int id)
+        public object DisplaySelectedQue(int id)
         {
-            var activeque = entities.Questions.Where(q => q.QuestionID == id).Select(q => new { q.QuestionID, q.QueDescription, q.Duration }).FirstOrDefault();
-            return activeque;
+            var selectque = entities.Questions.Where(q => q.QuestionID == id).Select(q => new { q.QuestionID, q.QueDescription, q.Duration }).FirstOrDefault();
+            return selectque;
         }
 
+        public bool CheckForActiveQue()
+        {
+            bool isActive = entities.Questions.Where(q => q.IsActiveQue == true).Any();
+            return isActive;
+        }
+
+        public object GetActiveQue()
+        {
+            var activeque = entities.Questions.Where(q => q.IsActiveQue == true).Select(q => new { q.QuestionID, q.QueDescription, q.Duration }).FirstOrDefault();
+            return activeque;
+        }
 
         public void UpdateQuestionStatus(Question que)
         {

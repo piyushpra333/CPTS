@@ -32,5 +32,26 @@ namespace CompetencyTrainingWebAPi.Models
             entities.Entry(ans).State = EntityState.Modified;
             entities.SaveChanges();
         }
+
+        public object GetTotalMarks(int id)
+        {
+            var totalscore = entities.Answers.GroupBy(a => new { a.Question.Training_TrainingID, a.Question.Training.TrainingName, a.Employee_EmpID, a.Employee.Name }).Select(s => new
+            {
+                TrainingID = s.Key.Training_TrainingID,
+                Name = s.Key.TrainingName,
+                EmpID = s.Key.Employee_EmpID,
+                EmpName = s.Key.Name,
+                Marks = s.Sum(a => a.Score)
+            }).Where(x=>x.TrainingID == id).OrderBy(o => o.TrainingID).ThenByDescending(o => o.Marks);
+
+            return totalscore;
+        }
+
+
+        public object GetTraineeAnswer(int queid,int empid)
+        {
+            var getans = entities.Answers.Where(a => a.Question_QuestionID == queid).Where(a => a.Employee_EmpID == empid).Select(s=>new { s.AnswerID,s.AnsDescription,s.Score,s.Employee_EmpID,s.Question_QuestionID});
+            return getans;
+        }
     }
 }
